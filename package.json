@@ -12,7 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.2"
+    "@astrojs/node": "^11.1.5",
+    "astro": "^7.3.2",
+    "dompurify": "^3.4.15",
+    "marked": "^18.0.12"
   },
   "allowScripts": {
     "esbuild": true
