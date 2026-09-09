@@ -1,0 +1,30 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"compatibility_date": "2026-09-08",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"name": "besede-chat",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"workers_dev": true,
+	"routes": [
+		{
+			"pattern": "besede-ai.kofeintechno.si",
+			"custom_domain": true
+		}
+	],
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"BESEDE_API_URL": "https://proc2.cjvt.si/rag_chat"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "518db34ea2a64384af007901a88e76c4"
+		}
+	]
+}

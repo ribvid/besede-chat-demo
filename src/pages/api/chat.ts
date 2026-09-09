@@ -1,11 +1,10 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
 function upstreamHeaders() {
-	const user = import.meta.env.BESEDE_API_USER;
-	const password = import.meta.env.BESEDE_API_PASSWORD;
-	const credentials = Buffer.from(`${user}:${password}`).toString('base64');
+	const credentials = btoa(`${env.BESEDE_API_USER}:${env.BESEDE_API_PASSWORD}`);
 	return {
 		Authorization: `Basic ${credentials}`,
 		'Content-Type': 'application/json',
@@ -15,7 +14,7 @@ function upstreamHeaders() {
 export const POST: APIRoute = async ({ request }) => {
 	const body = await request.text();
 
-	const upstream = await fetch(`${import.meta.env.BESEDE_API_URL}/besede/generate_stream`, {
+	const upstream = await fetch(`${env.BESEDE_API_URL}/besede/generate_stream`, {
 		method: 'POST',
 		headers: upstreamHeaders(),
 		body,
